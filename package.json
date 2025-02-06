@@ -1,6 +1,6 @@
 {
-  "name": "@zidsa/themes-cli",
-  "version": "1.1.0",
+  "name": "themes-cli",
+  "version": "1.2.0",
   "description": "A CLI to process zid theme folder",
   "main": "bin/zid-theme",
   "repository": {
