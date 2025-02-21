@@ -62,7 +62,7 @@ class ZidAPI {
           .send()
           .then(resolve)
           .catch((err) => {
-            logger.error("Error during API call");
+            logger.error(`Error during API call, ${err}`);
             reject(err); // Reject promise on API error
           });
       });
