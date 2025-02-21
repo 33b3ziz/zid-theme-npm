@@ -88,7 +88,7 @@ class Api {
         method: this.method,
         headers: this.headers,
         data: this.body,
-        timeout: 1000000,
+        timeout: 1500000,
       });
       return response.data;
     } catch (error) {
