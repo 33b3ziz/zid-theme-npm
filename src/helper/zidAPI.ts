@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import FormData from "form-data";
 import logger from "../console/logger"; // Node.js FormData
+import axios from "axios";
 
 class ZidAPI {
   public static getPartnerData(): Promise<TPartner> {
@@ -97,8 +98,19 @@ class ZidAPI {
           .post()
           .send()
           .then(resolve)
-          .catch((err) => {
-            logger.error(`Error during API call, ${err}`);
+          .catch((err: Error) => {
+            if (axios.isAxiosError(err) && err.response) {
+              logger.error(
+                `Error during API call: ${err.response.status} - ${err.response.statusText}`
+              );
+              logger.error(
+                `Response data: ${JSON.stringify(err.response.data)}`
+              );
+            } else {
+              logger.error(
+                `Error during API call: ${JSON.stringify(err.message)}`
+              );
+            }
             reject(err); // Reject promise on API error
           });
       });

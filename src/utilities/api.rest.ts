@@ -52,6 +52,7 @@ class Api {
 
   public addRoute(endpoint: string) {
     this.route = `${this.base_url}${endpoint}`;
+    // this.route = `https://invalid-api.zid.sa/v1${endpoint}`;
     return this;
   }
 
@@ -90,6 +91,11 @@ class Api {
         data: this.body,
         timeout: 1500000,
       });
+      logger.log(
+        `API request to ${url} successful, data: ${JSON.stringify(
+          response.data
+        )}`
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -99,6 +105,7 @@ class Api {
             return; // Avoid rejecting the promise here
           }
           const { message } = error.response.data as { message: string };
+          logger.error(`API error: ${message}`);
           throw new Error(message);
         }
       }
