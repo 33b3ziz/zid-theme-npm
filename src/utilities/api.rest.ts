@@ -105,7 +105,7 @@ class Api {
             return; // Avoid rejecting the promise here
           }
           const { message } = error.response.data as { message: string };
-          logger.error(`API error: ${message}`);
+          logger.error(`API error: ${JSON.stringify(message)}`);
           throw new Error(message);
         }
       }
